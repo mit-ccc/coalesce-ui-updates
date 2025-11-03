@@ -407,6 +407,8 @@ function ProjectsPage(props) {
         direction="column"
         justifyContent="flex-start"
         alignItems="flex-start"
+        justifySelf={"center"}
+        width="80%"
         spacing={5}
         style={{
           paddingLeft: 50,
@@ -452,7 +454,7 @@ function ProjectsPage(props) {
                   ":hover": {
                     backgroundColor: "#f5f5f5",
                   },
-                  padding: 2,
+                  paddingY: 2,
                   borderBottom: '1px solid #e0e0e0'
                 }}
               >
