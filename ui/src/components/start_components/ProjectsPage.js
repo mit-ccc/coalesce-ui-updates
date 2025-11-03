@@ -408,7 +408,7 @@ function ProjectsPage(props) {
         justifyContent="flex-start"
         alignItems="flex-start"
         justifySelf={"center"}
-        width="80%"
+        width="90%"
         spacing={5}
         style={{
           paddingLeft: 50,
