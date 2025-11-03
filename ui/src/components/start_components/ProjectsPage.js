@@ -435,7 +435,7 @@ function ProjectsPage(props) {
         {/* Display the list of project titles */}
         <Stack
           direction="column"
-          spacing={3}
+          spacing={0}
           sx={{
             width: "100%",
           }}
@@ -452,7 +452,8 @@ function ProjectsPage(props) {
                   ":hover": {
                     backgroundColor: "#f5f5f5",
                   },
-                  padding: 1,
+                  padding: 2,
+                  borderBottom: '1px solid #e0e0e0'
                 }}
               >
                 <Typography
