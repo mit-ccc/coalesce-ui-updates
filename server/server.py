@@ -597,8 +597,7 @@ def submit_context():
         context = request.json["context"]
 
         # convert response in last question to a longer string
-        context["6"]["response"] = f"{
-            context["6"]["response"]} percent of questions are open-ended and the remaining are close-ended"
+        context["6"]["response"] = f"{context["6"]["response"]} percent of questions are open-ended and the remaining are close-ended"
         # app.logger.info(context["6"]["response"])
 
         if WRITE_TO_DB:

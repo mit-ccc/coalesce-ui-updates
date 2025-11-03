@@ -3,6 +3,7 @@
 
 import json
 from datetime import datetime
+from flask import current_app
 from bson.objectid import ObjectId
 # from passwords import passphrase
 
@@ -165,7 +166,10 @@ class MongoDB:
         Returns True if the user exists, False if not
         """
         # check to see if the user_id exists in the users collection
-        return self.db.users.find_one({"user_id": user_id}) is not None
+        current_app.logger.info(f"DEBUG verifying user_id: {user_id}")
+        user_doc = self.db.users.find_one({"user_id": user_id})
+        current_app.logger.info(f"DEBUG result from DB: {user_doc}")
+        return user_doc is not None
 
     def get_user_projects(self, user_id):
         """
