@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import AddIcon from '@mui/icons-material/Add';
 import { Typography } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
@@ -414,7 +415,23 @@ function ProjectsPage(props) {
           paddingBottom: 30,
         }}
       >
+        <Stack
+          direction="row"
+          spacing={3}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          width={"100%"}
+        >
         <Typography variant="h5">Your Projects</Typography>
+        <Button
+          onClick={handleCreateProjectClick}
+          variant="contained"
+          size="large"
+          endIcon={<AddIcon />}
+        >
+          New Project
+        </Button>
+        </Stack>
         {/* Display the list of project titles */}
         <Stack
           direction="column"
@@ -464,13 +481,6 @@ function ProjectsPage(props) {
             );
           })}
         </Stack>
-        <Button
-          onClick={handleCreateProjectClick}
-          variant="contained"
-          size="large"
-        >
-          Create Project
-        </Button>
       </Stack>
       {/* Delete Dialog */}
       <ConfirmationDialog
