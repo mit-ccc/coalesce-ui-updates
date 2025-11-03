@@ -429,16 +429,16 @@ function ProjectsPage(props) {
           onClick={handleCreateProjectClick}
           variant="contained"
           size="large"
-          endIcon={<AddIcon />}
+          startIcon={<AddIcon />}
         >
-          New Project
+          New
         </Button>
         </Stack>
         {/* Display the list of project titles */}
         <Stack
           direction="column"
           spacing={0}
-          sx={{
+          style={{
             width: "100%",
           }}
         >
@@ -462,7 +462,7 @@ function ProjectsPage(props) {
                   variant="h6"
                   sx={{
                     cursor: "default",
-                    paddingRight: 2,
+                    paddingX: 1,
                   }}
                 >
                   {project.project_title}
@@ -478,6 +478,9 @@ function ProjectsPage(props) {
                   <MoreMenu
                     items={["Delete"]}
                     clickHandlers={[() => handleOpenDeleteDialog(project)]}
+                    style={{
+                      paddingRight: 2
+                    }}
                   />
                 </Stack>
               </Stack>
