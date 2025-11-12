@@ -488,9 +488,12 @@ function CellToolBar(props) {
       <Stack 
         direction="row"
         alignItems="center"
-        justifyContent="space-between"
         marginTop="1rem"
         sx={{
+          justifyContent:
+            engagement_type === "survey"
+              ? "space-between"
+              : "end",
           visibility:
             cellInfo.cell_details.cell_type === "question"
               ? "visible"
@@ -501,33 +504,33 @@ function CellToolBar(props) {
               : "auto"
         }}
       >
-        {/* Select question type */}
-        <FormControl
-          size="small"
-        >
-          {/* Add a label */}
-          <Typography
-            variant="body2"
-            component="div"
-            sx={{
-              paddingBottom: 0.5,
-            }}
-          >
-            Response Format
-          </Typography>
-          <Select
-            value={cellInfo.cell_details.response_format}
-            onChange={handleQuestionTypeChange}
-            displayEmpty
-          >
-            <MenuItem value={"open"}>Open-ended</MenuItem>
-            <MenuItem value={"closed"}>Close-ended</MenuItem>
-          </Select>
-        </FormControl>
+        { engagement_type === 'survey' && (
+            <FormControl
+            size="small"
+            >
+            {/* Add a label */}
+            <Typography
+              variant="body2"
+              component="div"
+              sx={{
+                paddingBottom: 0.5,
+              }}
+            >
+              Response Format
+            </Typography>
+            <Select
+              value={cellInfo.cell_details.response_format}
+              onChange={handleQuestionTypeChange}
+              displayEmpty
+            >
+              <MenuItem value={"open"}>Open-ended</MenuItem>
+              <MenuItem value={"closed"}>Close-ended</MenuItem>
+            </Select>
+            </FormControl>
+        )}
         <Stack
           direction="row"
           alignItems="center"
-          justifyContent="flex-end"
           spacing={0}
         >
           <Tooltip
