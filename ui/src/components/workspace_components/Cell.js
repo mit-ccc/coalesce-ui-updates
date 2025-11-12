@@ -18,6 +18,7 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
+import CellMoreMenu from "./CellMoreMenu";
 
 // help components
 import ResponseCategories from "../common_components/ResponseCategories";
@@ -271,13 +272,10 @@ function Cell(props) {
         sx={{
           flexGrow: 1,
           padding: 2,
-          border: `2px solid #e0e0e0`, // or #bdbdbd
-          bgcolor: `#FFFFFF`,
-          // round corners
+          border: `1px dashed #e0e0e0`, // or #bdbdbd
           borderRadius: 3,
-          mb: 3,
-          width: { md: "100%", xl: "90%" },
-          mt: 4,
+          mt: 1,
+          mb: 1
         }}
       >
         {loadingCell === true ? (
@@ -314,14 +312,99 @@ function Cell(props) {
             )}
           </Stack>
         ) : (
-          // Create the letter icon on the left side of the cell
           <Stack
             direction="row"
             alignItems="space-between"
             justifyContent="space-between"
           >
+            <Stack direction="column" spacing={0}>
+            <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    spacing={2}
+                    sx={{ marginBottom: 3 }}
+                  >
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    spacing={2}
+                    sx={{ marginBottom: 3 }}
+                  >
+                  <Tooltip title={<Typography fontSize={14} padding={1}>Creation Method</Typography>} placement="top">
+                    <Chip
+                      size="small"
+                      icon={
+                        {
+                          ai: <SmartToyIcon color='#FFFFFF'/>,
+                          human: <FaceIcon color='#FFFFFF'/>,
+                          human_ai: <FaceRetouchingNaturalIcon color='#FFFFFF'/>,
+                        }[cellInfo.human_ai_status]
+                      }
+                      label={
+                        {
+                          ai: "AI",
+                          human: "Human",
+                          human_ai: "Human + AI",
+                        }[cellInfo.human_ai_status]
+                      }
+                      sx={{
+                        padding: ".5rem"
+                      }}
+                    >
+                    </Chip>
+                  </Tooltip>
+                  <Tooltip title={<Typography fontSize={14} padding={1}>Cell Type</Typography>} placement="top">
+                    <Chip
+                      size="small"
+                      label={
+                        cellInfo.cell_details.cell_type === "question"
+                          ? "Question"
+                          : "Guide Text"
+                      }
+                      color="primary"
+                      sx={{
+                        padding: ".5rem"
+                      }}
+                    />
+                  </Tooltip>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <Avatar
+                      sx={{
+                        width: 24,
+                        height: 24,
+                      }}
+                    >
+                      <AccessTimeFilledIcon />
+                    </Avatar>
+                    <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Input
+                        size="small"
+                        id={"cell-time-estimate-" + props.cell_id}
+                        value={timeEstimate}
+                        multiline={false}
+                        type="number"
+                        margin="dense"
+                        sx={{
+                          typography: "body1",
+                          // have the width be as long as the number of digits in the time estimate
+                          width: `${timeEstimate.toString().length + 3}ch`,
+                        }}
+                        onChange={handleEditLocalTimeEstimate}
+                        onBlur={handleEditGlobalTimeEstimate}
+                      />
+                      <Typography variant="body2">
+                        {timeEstimate === 1 ? "minute" : "minutes"}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                  </Stack>
+                  <CellMoreMenu 
+                        cell_id={props.cell_id}
+                        handleDeleteCell={props.handleDeleteCell} 
+                />
+                </Stack>
             <Stack direction="row" spacing={2} alignItems="flex-start">
-              <Avatar>{props.letter.toUpperCase()}</Avatar>
               <Stack direction="column" spacing={0}>
                 {/* BUG = The input doesn't become the full width unless I have a Typography component
                                 before it that covers the full width.
@@ -374,7 +457,7 @@ function Cell(props) {
                   />
                 )}
                 {cellInfo.cell_details.cell_type === "question" && [
-                  cellInfo.cell_details.response_format === "closed" ? (
+                  cellInfo.cell_details.response_format === "closed" && (
                     <ResponseCategories
                       key="0"
                       editable={true}
@@ -383,16 +466,15 @@ function Cell(props) {
                       }
                       updateResponseCategories={updateResponseCategories}
                     />
-                  ) : (
-                    <TextField
-                      key="1"
-                      placeholder="Answer goes here..."
-                      disabled={true}
-                      sx={{ marginTop: 3 }}
-                    />
-                  ),
+                  )
                 ]}
+                </Stack>
               </Stack>
+              <CellToolBar
+                cell_id={props.cell_id}
+                handleDeleteCell={props.handleDeleteCell}
+                setLoadingCell={setLoadingCell}
+            />
             </Stack>
             <Tooltip title="Move Cell" className="draggy">
               <IconButton
@@ -406,91 +488,6 @@ function Cell(props) {
             </Tooltip>
           </Stack>
         )}
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="flex-start"
-          spacing={2}
-          sx={{ marginTop: 3 }}
-        >
-          <Tooltip
-            title={
-              cellInfo.human_ai_status === "ai"
-                ? "AI Generated"
-                : cellInfo.human_ai_status === "human"
-                ? "Human Generated"
-                : "Human + AI Generated"
-            }
-            placement="bottom"
-          >
-            <Avatar
-              sx={{
-                width: 35,
-                height: 35,
-              }}
-              variant="questionStatus"
-            >
-              {
-                {
-                  ai: <SmartToyIcon />,
-                  human: <FaceIcon />,
-                  human_ai: <FaceRetouchingNaturalIcon />,
-                }[cellInfo.human_ai_status]
-              }
-            </Avatar>
-          </Tooltip>
-          <Chip
-            label={
-              cellInfo.cell_details.cell_type === "question"
-                ? "Question"
-                : "Text"
-            }
-            color="primary"
-          />
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Avatar
-              sx={{
-                width: 24,
-                height: 24,
-              }}
-            >
-              <AccessTimeFilledIcon />
-            </Avatar>
-            <Stack direction="row" spacing={0.5} alignItems="center">
-              <Input
-                id={"cell-time-estimate-" + props.cell_id}
-                value={timeEstimate}
-                multiline={false}
-                type="number"
-                margin="dense"
-                sx={{
-                  typography: "body1",
-                  // have the width be as long as the number of digits in the time estimate
-                  width: `${timeEstimate.toString().length + 3}ch`,
-                }}
-                onChange={handleEditLocalTimeEstimate}
-                onBlur={handleEditGlobalTimeEstimate}
-              />
-              <Typography variant="body1">
-                {timeEstimate === 1 ? "minute" : "minutes"}
-              </Typography>
-            </Stack>
-          </Stack>
-        </Stack>
-        <Divider
-          sx={{
-            marginTop: 4,
-            marginBottom:
-              cellInfo.cell_details.cell_type === "question" ? 3 : 1,
-            borderBottomWidth: "2px",
-          }}
-        />
-        {/* Edit bar */}
-        <CellToolBar
-          cell_id={props.cell_id}
-          handleDeleteCell={props.handleDeleteCell}
-          setLoadingCell={setLoadingCell}
-        />
       </Box>
     </ThemeProvider>
   );

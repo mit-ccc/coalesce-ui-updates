@@ -485,7 +485,7 @@ function CellToolBar(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
+      <Stack direction="row" alignItems="center" justifyContent="space-between" marginTop="1rem">
         {/* Select question type */}
         <FormControl
           size="small"
@@ -551,15 +551,6 @@ function CellToolBar(props) {
               <SearchIcon fontSize="large" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Delete">
-            <IconButton color="inherit" onClick={handleOpenDeleteDialog}>
-              <DeleteIcon fontSize="large" />
-            </IconButton>
-          </Tooltip>
-          <MoreMenu
-            items={["Duplicate"]}
-            clickHandlers={[() => handleDuplicate()]}
-          />
         </Stack>
       </Stack>
       {/* Delete Dialog */}

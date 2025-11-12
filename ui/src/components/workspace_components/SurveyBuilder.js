@@ -23,12 +23,11 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open, topheight }) => ({
     flexGrow: 1,
     padding: 0,
-    //   padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: 0,
+    marginLeft: `-${drawerWidth * .5}px`,
     marginTop: `${topheight}px`,
     ...(open && {
       transition: theme.transitions.create("margin", {

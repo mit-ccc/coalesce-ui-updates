@@ -132,7 +132,6 @@ function SectionHeader(props) {
         justifyContent="space-between"
         sx={{
           paddingBottom: 1,
-          width: { md: "100%", xl: "90%" },
         }}
       >
         {/* Create section title with input for props.text value */}
