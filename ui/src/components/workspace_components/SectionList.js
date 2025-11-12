@@ -33,7 +33,7 @@ import { addEvent } from "../../store/userTrackingSlice";
 
 import { engagementTypeName } from "../../utils";
 
-const drawerWidth = 300;
+const drawerWidth = 250;
 
 //   Set style for DrawerHeader component
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -205,6 +205,8 @@ function SectionList(props) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            border: 'none',
+            backgroundColor: 'rgb(241, 244, 248)'
           },
         }}
       >
@@ -217,12 +219,30 @@ function SectionList(props) {
             paddingBottom: 2,
           }}
         >
-          <List dense={false} sx={{ width: "100%" }}>
+          <List dense={true} sx={{ width: "100%" }}>
             <ListItem key="header">
               <ListItemText
                 primary="Sections"
-                primaryTypographyProps={{ fontSize: 20, marginBottom: -1 }}
+                primaryTypographyProps={{ fontSize: 16 }}
               />
+            {/* Create the add section button */}
+              <Tooltip title="Add Section">
+                <IconButton
+                  onClick={handleAddSection}
+                  disableFocusRipple={true}
+                  disableRipple={true}
+                >
+                  <Avatar 
+                    variant="button"
+                    sx={{
+                      width: 24,
+                      height: 24
+                    }}
+                  >
+                    <AddIcon />
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
             </ListItem>
             {/* Insert total time estimate with time icon in front */}
             <ListItem key="total-time">
@@ -238,7 +258,7 @@ function SectionList(props) {
               </ListItemAvatar>
               <ListItemText
                 primary={`Takes around ${totalTime} minutes to complete the ${engagementType}`}
-                primaryTypographyProps={{ fontSize: 14 }}
+                primaryTypographyProps={{ fontSize: 12 }}
               />
             </ListItem>
             <Container lockAxis="y" onDrop={onDrop}>
@@ -250,7 +270,7 @@ function SectionList(props) {
                       onClick={() => handleScroll(index)}
                       key={index}
                     >
-                      <ListItemAvatar sx={{ mr: -2 }}>
+{/*                       <ListItemAvatar sx={{ mr: -2 }}>
                         <Avatar
                           sx={{
                             width: 24,
@@ -260,7 +280,7 @@ function SectionList(props) {
                         >
                           {index + 1}
                         </Avatar>
-                      </ListItemAvatar>
+                      </ListItemAvatar> */}
                       <ListItemText
                         primary={section.title}
                         primaryTypographyProps={{ mb: 0.25, fontSize: 14 }}
@@ -274,6 +294,7 @@ function SectionList(props) {
                           disableFocusRipple={true}
                           disableRipple={true}
                           variant="secondary"
+                          size="small"
                         >
                           <DragIndicatorIcon />
                         </IconButton>
@@ -284,18 +305,6 @@ function SectionList(props) {
               })}
             </Container>
           </List>
-          {/* Create the add section button */}
-          <Tooltip title="Add Section">
-            <IconButton
-              onClick={handleAddSection}
-              disableFocusRipple={true}
-              disableRipple={true}
-            >
-              <Avatar variant="button">
-                <AddIcon />
-              </Avatar>
-            </IconButton>
-          </Tooltip>
         </Stack>
       </Drawer>
     </ThemeProvider>

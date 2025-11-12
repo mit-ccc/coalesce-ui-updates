@@ -166,7 +166,16 @@ function QuestionList(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack direction="column" spacing={2} style={{ padding: 20 }}>
+      <Stack
+        direction="column" 
+        spacing={2}
+        style={{ 
+          padding: 20, 
+          marginTop: '1rem', 
+          backgroundColor: 'white',
+          border: '.5px solid rgb(229, 228, 228)' 
+        }}
+      >
         <Container
           lockAxis="y"
           orientation="vertical"
