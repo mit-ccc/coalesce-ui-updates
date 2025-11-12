@@ -438,7 +438,7 @@ function Cell(props) {
                   fullWidth
                   multiline={true}
                   margin="dense"
-                  sx={{ typography: "body1" }}
+                  sx={{ typography: "body1", fontSize: "14px" }}
                   onChange={handleEditLocalMainText}
                   onBlur={handleEditGlobalMainText}
                 />

@@ -485,16 +485,25 @@ function CellToolBar(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" marginTop="1rem">
+      <Stack 
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        marginTop="1rem"
+        sx={{
+          visibility:
+            cellInfo.cell_details.cell_type === "question"
+              ? "visible"
+              : "hidden",
+          height:
+            cellInfo.cell_details.cell_type === "text"
+              ? "0px"
+              : "auto"
+        }}
+      >
         {/* Select question type */}
         <FormControl
           size="small"
-          sx={{
-            visibility:
-              cellInfo.cell_details.cell_type === "question"
-                ? "visible"
-                : "hidden",
-          }}
         >
           {/* Add a label */}
           <Typography
