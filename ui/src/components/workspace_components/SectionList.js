@@ -235,8 +235,8 @@ function SectionList(props) {
                   <Avatar 
                     variant="button"
                     sx={{
-                      width: 24,
-                      height: 24
+                      width: 28,
+                      height: 28
                     }}
                   >
                     <AddIcon />

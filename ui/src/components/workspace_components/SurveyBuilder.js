@@ -27,7 +27,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth * .5}px`,
+    marginLeft: `-${drawerWidth * .78}px`,
     marginTop: `${topheight}px`,
     ...(open && {
       transition: theme.transitions.create("margin", {

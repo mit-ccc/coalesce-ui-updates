@@ -36,8 +36,14 @@ function MoreMenu(props) {
           disableFocusRipple={true}
           disableRipple={true}
         >
-          <Avatar variant="button">
-            <AddIcon />
+          <Avatar 
+            variant="button" 
+            sx = {{
+              width: '28px',
+              height: '28px'
+            }}>
+            <AddIcon 
+            />
           </Avatar>
         </IconButton>
       ) : (
