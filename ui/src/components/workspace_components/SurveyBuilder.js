@@ -14,6 +14,7 @@ import theme from "../common_components/theme";
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { addEvent } from "../../store/userTrackingSlice";
+import Section from "./Section";
 
 const drawerWidth = 300;
 
@@ -120,6 +121,7 @@ function SurveyBuilder(props) {
           <DrawerHeader />
           <QuestionList sectionRefs={sectionRefs} />
         </Main>
+        <SectionList open={open} sectionRefs={sectionRefs} />
       </Box>
     </ThemeProvider>
   );
