@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Input from "@mui/material/Input";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete"
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
@@ -166,18 +168,20 @@ function SectionHeader(props) {
             onChange={handleEditLocalSectionName}
             onBlur={handleEditGlobalSectionName}
           />
-          <Typography
+{/*           <Typography
             variant="subtitle"
             component="div"
             sx={{ m: 0, minWidth: `15ch` }}
           >
             ( {sectionTimeEstimate}{" "}
             {sectionTimeEstimate === 1 ? "min" : "mins"})
-          </Typography>
+          </Typography> */}
         </Stack>
         {/* triple dot */}
         {/* LOW PRIORITY TODO: could add merge and duplicate */}
-        <MoreMenu items={["Delete"]} clickHandlers={[handleOpenDeleteDialog]} />
+        <IconButton color="inherit" onClick={handleOpenDeleteDialog}>
+              <DeleteIcon fontSize="small" />
+        </IconButton>        
       </Stack>
       {/* Delete Dialog */}
       <ConfirmationDialog

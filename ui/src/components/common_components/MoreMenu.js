@@ -4,6 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
 // import { Tooltip } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
@@ -31,21 +33,19 @@ function MoreMenu(props) {
     <ThemeProvider theme={theme}>
       {props.type === "add_cell" ? (
         // <Tooltip title="Add Cell">
+        <Tooltip         
+          title={<Typography fontSize={14}>Add Cell</Typography>} 
+          placement="right"
+        >
         <IconButton
+          variant="secondary"
           onClick={handleMoreClick}
           disableFocusRipple={true}
           disableRipple={true}
         >
-          <Avatar 
-            variant="button" 
-            sx = {{
-              width: '28px',
-              height: '28px'
-            }}>
-            <AddIcon 
-            />
-          </Avatar>
+            <AddIcon />
         </IconButton>
+        </Tooltip>
       ) : (
         // </Tooltip>
         <IconButton
@@ -54,7 +54,7 @@ function MoreMenu(props) {
           variant="secondary"
           sx={{ padding: 0 }}
         >
-          <MoreVertIcon fontSize="large" />
+          <MoreVertIcon fontSize="medium" />
         </IconButton>
       )}
       <Menu

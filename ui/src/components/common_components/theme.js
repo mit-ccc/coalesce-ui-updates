@@ -44,7 +44,7 @@ const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          backgroundColor: defaultTheme.palette.primary.light,
+          backgroundColor: defaultTheme.palette.primary,
           color: "white",
         },
       },
@@ -59,7 +59,7 @@ const theme = createTheme({
         {
           props: { variant: "secondary" },
           style: {
-            color: grey[500],
+            color: grey[500],       
           },
         },
         {

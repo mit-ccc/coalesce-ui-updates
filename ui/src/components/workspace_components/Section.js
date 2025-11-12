@@ -4,6 +4,9 @@ import { Stack } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
+
 
 import { Container, Draggable } from "@edorivai/react-smooth-dnd";
 
@@ -175,8 +178,8 @@ function Section(props) {
                 <Cell
                   key={index}
                   cell_id={cell}
-                  letter={String.fromCharCode(97 + index)}
-                  handleDeleteCell={handleDeleteCell}
+/*                   letter={String.fromCharCode(97 + index)}
+ */               handleDeleteCell={handleDeleteCell}
                 />
               </Draggable>
             );
@@ -184,14 +187,19 @@ function Section(props) {
         </Container>
         {/* Create the add cell button */}
         <Stack direction="column" justifyContent="center" alignItems="center">
-          <MoreMenu
-            items={["Add text cell", "Add question cell"]}
-            clickHandlers={[
-              () => handleAddCell("text"),
-              () => handleAddCell("question"),
-            ]}
-            type="add_cell"
-          />
+          <Tooltip         
+            title={<Typography fontSize={14}>Add Cell</Typography>} 
+            placement="right"
+          >
+            <MoreMenu
+              items={["Add text cell", "Add question cell"]}
+              clickHandlers={[
+                () => handleAddCell("text"),
+                () => handleAddCell("question"),
+              ]}
+              type="add_cell"
+            />
+          </Tooltip>
         </Stack>
       </Stack>
     </ThemeProvider>

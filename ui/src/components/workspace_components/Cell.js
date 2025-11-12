@@ -271,7 +271,8 @@ function Cell(props) {
       <Box
         sx={{
           flexGrow: 1,
-          padding: 2,
+          paddingLeft: 2,
+          paddingY: 2,
           border: `1px dashed #e0e0e0`, // or #bdbdbd
           borderRadius: 3,
           mt: 1,
@@ -331,9 +332,10 @@ function Cell(props) {
                     spacing={2}
                     sx={{ marginBottom: 3 }}
                   >
-                  <Tooltip title={<Typography fontSize={14} padding={1}>Creation Method</Typography>} placement="top">
+                  <Tooltip title={<Typography fontSize={14}>Creation Method</Typography>} placement="top">
                     <Chip
                       size="small"
+                      color="primary"
                       icon={
                         {
                           ai: <SmartToyIcon color='#FFFFFF'/>,
@@ -349,12 +351,12 @@ function Cell(props) {
                         }[cellInfo.human_ai_status]
                       }
                       sx={{
-                        padding: ".5rem"
+                        padding: ".5rem",
                       }}
                     >
                     </Chip>
                   </Tooltip>
-                  <Tooltip title={<Typography fontSize={14} padding={1}>Cell Type</Typography>} placement="top">
+                  <Tooltip title={<Typography fontSize={14}>Cell Type</Typography>} placement="top">
                     <Chip
                       size="small"
                       label={
@@ -387,6 +389,7 @@ function Cell(props) {
                         margin="dense"
                         sx={{
                           typography: "body1",
+                          fontSize: "14px",
                           // have the width be as long as the number of digits in the time estimate
                           width: `${timeEstimate.toString().length + 3}ch`,
                         }}
@@ -394,7 +397,7 @@ function Cell(props) {
                         onBlur={handleEditGlobalTimeEstimate}
                       />
                       <Typography variant="body2">
-                        {timeEstimate === 1 ? "minute" : "minutes"}
+                        {timeEstimate === 1 ? "min" : "mins"}
                       </Typography>
                     </Stack>
                   </Stack>
@@ -476,14 +479,21 @@ function Cell(props) {
                 setLoadingCell={setLoadingCell}
             />
             </Stack>
-            <Tooltip title="Move Cell" className="draggy">
+            <Tooltip             
+              title={<Typography fontSize={14}>Move Cell</Typography>} 
+              placement="right"
+              className="draggy"
+            >
               <IconButton
                 disableFocusRipple={true}
                 disableRipple={true}
                 className="draggy"
                 variant="secondary"
+                sx={{
+                  marginLeft: '1rem'
+                }}
               >
-                <DragIndicatorIcon fontSize="large" />
+                <DragIndicatorIcon fontSize="medium" />
               </IconButton>
             </Tooltip>
           </Stack>

@@ -10,6 +10,8 @@ import { styled } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import { IconButton } from "@mui/material";
 import { Stack } from "@mui/system";
+import Typography from "@mui/material/Typography"
+
 
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import AddIcon from "@mui/icons-material/Add";
@@ -226,21 +228,17 @@ function SectionList(props) {
                 primaryTypographyProps={{ fontSize: 16 }}
               />
             {/* Create the add section button */}
-              <Tooltip title="Add Section">
+            <Tooltip         
+              title={<Typography fontSize={14}>Add Section</Typography>} 
+              placement="right"
+            >
                 <IconButton
+                  variant="secondary"
                   onClick={handleAddSection}
                   disableFocusRipple={true}
                   disableRipple={true}
                 >
-                  <Avatar 
-                    variant="button"
-                    sx={{
-                      width: 28,
-                      height: 28
-                    }}
-                  >
                     <AddIcon />
-                  </Avatar>
                 </IconButton>
               </Tooltip>
             </ListItem>
@@ -289,7 +287,10 @@ function SectionList(props) {
                         }
                         secondaryTypographyProps={{ fontSize: 12 }}
                       />
-                      <Tooltip title="Move Section">
+                      <Tooltip         
+                        title={<Typography fontSize={14}>Move Section</Typography>} 
+                        placement="right"
+                      >
                         <IconButton
                           disableFocusRipple={true}
                           disableRipple={true}

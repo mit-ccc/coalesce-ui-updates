@@ -534,7 +534,8 @@ function CellToolBar(props) {
           spacing={0}
         >
           <Tooltip
-            title="Generate Alternative Questions"
+            title={<Typography fontSize={14}>Generate Alternate Questions</Typography>} 
+            placement="bottom"
             sx={{
               visibility:
                 cellInfo.cell_details.cell_type === "question"
@@ -547,7 +548,8 @@ function CellToolBar(props) {
             </IconButton>
           </Tooltip>
           <Tooltip
-            title="Check Question for Issues"
+            title={<Typography fontSize={14}>Check Question for Issues</Typography>} 
+            placement="bottom"
             sx={{
               visibility:
                 cellInfo.cell_details.cell_type === "question"
