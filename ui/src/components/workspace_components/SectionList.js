@@ -96,8 +96,8 @@ function SectionList(props) {
     Object.values(cells).forEach((cell) => {
       total += cell.time_estimate;
     });
-    // round to 1 decimal place
-    total = Math.round(total * 10) / 10;
+    // round to nearest integer
+    total = Math.round(total);
     setTotalTime(total);
   }, [cells]);
 
@@ -109,8 +109,8 @@ function SectionList(props) {
         timeEstimate += cell.time_estimate;
       }
     });
-    // round to 1 decimal place
-    timeEstimate = Math.round(timeEstimate * 10) / 10;
+    // round to nearest integer
+    timeEstimate = Math.round(timeEstimate);
     return timeEstimate;
   };
 
