@@ -49,8 +49,8 @@ function SectionHeader(props) {
         timeEstimate += cell.time_estimate;
       }
     });
-    // round to 1 decimal place
-    timeEstimate = Math.round(timeEstimate * 10) / 10;
+    // round to nearest integer
+    timeEstimate = Math.round(timeEstimate);
     setSectionTimeEstimate(timeEstimate);
   }, [cells, section.id]);
 
