@@ -145,7 +145,7 @@ function SectionHeader(props) {
           sx={{ width: "100%" }}
         >
           <Typography
-            variant="h6"
+            variant="subtitle"
             component="div"
             sx={{
               minWidth: `10ch`,
@@ -163,17 +163,17 @@ function SectionHeader(props) {
             fullWidth
             margin="dense"
             multiline={true}
-            sx={{ typography: "h6", mr: 0.5 }}
+            sx={{ typography: "subtitle", mr: 0.5 }}
             onChange={handleEditLocalSectionName}
             onBlur={handleEditGlobalSectionName}
           />
           <Typography
-            variant="h6"
+            variant="subtitle"
             component="div"
             sx={{ m: 0, minWidth: `15ch` }}
           >
-            ( ~ {sectionTimeEstimate}{" "}
-            {sectionTimeEstimate === 1 ? "minute" : "minutes"})
+            ( {sectionTimeEstimate}{" "}
+            {sectionTimeEstimate === 1 ? "min" : "mins"})
           </Typography>
         </Stack>
         {/* triple dot */}

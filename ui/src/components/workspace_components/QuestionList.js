@@ -170,6 +170,7 @@ function QuestionList(props) {
         direction="column" 
         spacing={2}
         style={{ 
+          width: '90%',
           padding: 20, 
           marginTop: '1rem', 
           backgroundColor: 'white',

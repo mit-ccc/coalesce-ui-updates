@@ -28,7 +28,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: 0,
     marginTop: `${topheight}px`,
     ...(open && {
       transition: theme.transitions.create("margin", {
@@ -121,7 +121,6 @@ function SurveyBuilder(props) {
           <DrawerHeader />
           <QuestionList sectionRefs={sectionRefs} />
         </Main>
-        <SectionList open={open} sectionRefs={sectionRefs} />
       </Box>
     </ThemeProvider>
   );
