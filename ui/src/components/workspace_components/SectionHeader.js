@@ -146,7 +146,7 @@ function SectionHeader(props) {
           sx={{ width: "100%" }}
         >
           <Typography
-            variant="subtitle"
+            variant="h5"
             component="div"
             sx={{
               minWidth: `10ch`,
@@ -164,7 +164,7 @@ function SectionHeader(props) {
             fullWidth
             margin="dense"
             multiline={true}
-            sx={{ typography: "subtitle", mr: 0.5 }}
+            sx={{ typography: "h5", mr: 0.5 }}
             onChange={handleEditLocalSectionName}
             onBlur={handleEditGlobalSectionName}
           />
@@ -180,7 +180,7 @@ function SectionHeader(props) {
         {/* triple dot */}
         {/* LOW PRIORITY TODO: could add merge and duplicate */}
         <IconButton color="inherit" onClick={handleOpenDeleteDialog}>
-              <DeleteIcon fontSize="small" />
+              <DeleteIcon fontSize="medium" />
         </IconButton>        
       </Stack>
       {/* Delete Dialog */}

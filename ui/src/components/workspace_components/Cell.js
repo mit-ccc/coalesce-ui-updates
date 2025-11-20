@@ -270,11 +270,6 @@ function Cell(props) {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          flexGrow: 1,
-          paddingLeft: 2,
-          paddingY: 2,
-          border: `1px dashed #e0e0e0`, // or #bdbdbd
-          borderRadius: 3,
           mt: 1,
           mb: 1
         }}
@@ -318,7 +313,15 @@ function Cell(props) {
             alignItems="space-between"
             justifyContent="space-between"
           >
-            <Stack direction="column" spacing={0}>
+            <Stack 
+              direction="column"
+              spacing={0}
+              sx={{
+                padding: 2,
+                borderRadius: 3,
+                border: `1px dashed #e0e0e0`,
+              }}
+            >
             <Stack
                     direction="row"
                     alignItems="center"

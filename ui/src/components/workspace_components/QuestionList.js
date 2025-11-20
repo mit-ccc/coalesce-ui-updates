@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Section from "./Section";
 
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
@@ -25,6 +25,8 @@ function QuestionList(props) {
 
   // get the project_id from the store
   const projectId = useSelector((state) => state.projectDetails.project_id);
+
+  const projectTitle = useSelector((state) => state.projectDetails.project_title);
 
   // get the cells from the store (for user tracking)
   const cells = useSelector((state) => state.projectDetails.cells);
@@ -170,9 +172,8 @@ function QuestionList(props) {
         direction="column" 
         spacing={2}
         style={{ 
-          padding: '4rem', 
+          padding: '6rem', 
           marginTop: '1rem', 
-          marginRight: '1rem',
           backgroundColor: 'white',
           border: '.5px solid rgb(192, 192, 192)' 
         }}
@@ -187,6 +188,7 @@ function QuestionList(props) {
           shouldAnimateDrop={() => false}
           shouldAcceptDrop={() => false}
         >
+          <Typography variant="h4" gutterBottom="true">{projectTitle}</Typography>
           {sections.map((_section, index) => {
             return (
               <Draggable key={index}>

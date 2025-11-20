@@ -29,7 +29,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     }),
     marginLeft: `-${drawerWidth * .5}px`,
     marginTop: `${topheight}px`,
-    marginRight: `${drawerWidth * .25}px`,
+    marginRight: `${drawerWidth * .35}px`,
     ...(open && {
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
