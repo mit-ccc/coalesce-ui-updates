@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Stack } from "@mui/system";
 import Box from "@mui/material/Box";
-import { IconButton, Typography } from "@mui/material";
+import { Icon, IconButton, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Input from "@mui/material/Input";
@@ -12,6 +12,7 @@ import Chip from "@mui/material/Chip";
 
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import FaceIcon from "@mui/icons-material/Face";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
@@ -310,25 +311,24 @@ function Cell(props) {
         ) : (
           <Stack
             direction="row"
-            alignItems="space-between"
             justifyContent="space-between"
           >
             <Stack 
               direction="column"
               spacing={0}
               sx={{
-                padding: 2,
+                padding: 3,
                 borderRadius: 3,
                 border: `1px dashed #e0e0e0`,
               }}
             >
-            <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={2}
-                    sx={{ marginBottom: 3 }}
-                  >
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                spacing={2}
+                sx={{ marginBottom: 3 }}
+              >
                   <Stack
                     direction="row"
                     alignItems="center"
@@ -359,20 +359,6 @@ function Cell(props) {
                     >
                     </Chip>
                   </Tooltip>
-                  <Tooltip title={<Typography fontSize={14}>Cell Type</Typography>} placement="top">
-                    <Chip
-                      size="small"
-                      label={
-                        cellInfo.cell_details.cell_type === "question"
-                          ? "Question"
-                          : "Guide Text"
-                      }
-                      color="primary"
-                      sx={{
-                        padding: ".5rem"
-                      }}
-                    />
-                  </Tooltip>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <Avatar
                       sx={{
@@ -384,7 +370,6 @@ function Cell(props) {
                     </Avatar>
                     <Stack direction="row" spacing={0.5} alignItems="center">
                       <Input
-                        size="small"
                         id={"cell-time-estimate-" + props.cell_id}
                         value={timeEstimate}
                         multiline={false}
@@ -392,7 +377,6 @@ function Cell(props) {
                         margin="dense"
                         sx={{
                           typography: "body1",
-                          fontSize: "14px",
                           // have the width be as long as the number of digits in the time estimate
                           width: `${timeEstimate.toString().length + 3}ch`,
                         }}
@@ -432,6 +416,14 @@ function Cell(props) {
                   hidden text to address the width issue. This feels really
                   hacky, but it works, so I will do it. QED.
                 </Typography>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                >
+                {cellInfo.cell_details.cell_type === "question" && (
+                <QuestionAnswerOutlinedIcon/>
+                )}
                 <Input
                   id={"cell-main-text-" + props.cell_id}
                   // defaultValue={cellInfo.cell_details.main_text}
@@ -448,16 +440,17 @@ function Cell(props) {
                   onChange={handleEditLocalMainText}
                   onBlur={handleEditGlobalMainText}
                 />
+                </Stack>
                 {cellInfo.cell_details.cell_type === "question" && (
                   <Input
                     id={"cell-description-" + props.cell_id}
                     // defaultValue={cellInfo.cell_details.description}
                     value={description}
                     placeholder="Input optional description here"
-                    fullWidth
+                    //fullWidth
                     multiline={true}
                     margin="dense"
-                    sx={{ typography: "caption", paddingTop: 3 }}
+                    sx={{ typography: "caption", paddingTop: 3, marginLeft: 5}}
                     onChange={handleEditLocalDescriptionText}
                     onBlur={handleEditGlobalDescriptionText}
                   />
