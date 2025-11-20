@@ -174,7 +174,7 @@ function QuestionList(props) {
           marginTop: '1rem', 
           marginRight: '1rem',
           backgroundColor: 'white',
-          border: '.5px solid rgb(229, 228, 228)' 
+          border: '.5px solid rgb(192, 192, 192)' 
         }}
       >
         <Container
