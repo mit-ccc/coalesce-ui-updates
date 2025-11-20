@@ -174,6 +174,7 @@ function QuestionList(props) {
         style={{ 
           padding: '6rem', 
           marginTop: '1rem', 
+          marginBottom: '1rem', 
           backgroundColor: 'white',
           border: '.5px solid rgb(192, 192, 192)' 
         }}
