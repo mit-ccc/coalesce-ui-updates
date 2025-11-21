@@ -63,8 +63,19 @@ function Cell(props) {
   // state variable for seconds passed while loading
   const [secondsPassed, setSecondsPassed] = useState(0);
 
-  // state variable for expanding cell
-  const [expanded, setExpanded] = useState(false);
+  // state variable for expanding the active cell
+  const [isActive, setIsActive] = useState(false);
+
+  const handleFocus = () => {
+    setIsActive(true);
+  };
+
+  const handleBlur = (e) => {
+    // Check if the new focus target is inside the parent
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsActive(false);
+    }
+  };
 
   const timerInterval = useRef();
 
@@ -319,12 +330,14 @@ function Cell(props) {
             <Stack 
               direction="column"
               spacing={0}
+              onClick={handleFocus}
               sx={{
                 padding: 3,
                 borderRadius: 3,
                 border: `1px dashed #e0e0e0`,
               }}
             >
+              { isActive && (
               <Stack
                 direction="row"
                 alignItems="center"
@@ -397,6 +410,7 @@ function Cell(props) {
                         handleDeleteCell={props.handleDeleteCell} 
                 />
                 </Stack>
+            )}
             <Stack direction="row" spacing={2} alignItems="flex-start">
               <Stack direction="column" spacing={0}>
                 {/* BUG = The input doesn't become the full width unless I have a Typography component
