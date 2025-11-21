@@ -63,6 +63,9 @@ function Cell(props) {
   // state variable for seconds passed while loading
   const [secondsPassed, setSecondsPassed] = useState(0);
 
+  // state variable for expanding cell
+  const [expanded, setExpanded] = useState(false);
+
   const timerInterval = useRef();
 
   // function to start or stop timer based on loadingCell
