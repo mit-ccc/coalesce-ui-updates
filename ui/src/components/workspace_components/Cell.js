@@ -77,7 +77,12 @@ function Cell(props) {
     }
   };
 
+  // state variable to track whether cell is being dragged
+  const [isDragging, setIsDragging] = useState(false);
+
   const timerInterval = useRef();
+
+  const boxRef = useRef(null);
 
   // function to start or stop timer based on loadingCell
   useEffect(() => {
@@ -284,10 +289,14 @@ function Cell(props) {
   return (
     <ThemeProvider theme={theme}>
       <Box
+        tabIndex={0} 
+        ref={boxRef}  
         sx={{
           mt: 1,
           mb: 1
         }}
+        onFocusCapture={handleFocus}
+        onBlur={handleBlur}
       >
         {loadingCell === true ? (
           <Stack
@@ -330,14 +339,14 @@ function Cell(props) {
             <Stack 
               direction="column"
               spacing={0}
-              onClick={handleFocus}
               sx={{
                 padding: 3,
                 borderRadius: 3,
-                border: `1px dashed #e0e0e0`,
+                border: isActive && !isDragging ? "1.5px solid #e0e0e0" :  "1px dashed #e0e0e0",
+                boxShadow: isActive && !isDragging ? "2px 2px 6px rgba(0, 0, 0, 0.16)" : "none"
               }}
             >
-              { isActive && (
+              { isActive && !isDragging && (
               <Stack
                 direction="row"
                 alignItems="center"
@@ -458,7 +467,7 @@ function Cell(props) {
                   onBlur={handleEditGlobalMainText}
                 />
                 </Stack>
-                {cellInfo.cell_details.cell_type === "question" && (
+                {cellInfo.cell_details.cell_type === "question" && isActive && !isDragging && (
                   <Input
                     id={"cell-description-" + props.cell_id}
                     // defaultValue={cellInfo.cell_details.description}
@@ -486,11 +495,13 @@ function Cell(props) {
                 ]}
                 </Stack>
               </Stack>
+              { isActive && !isDragging && (
               <CellToolBar
                 cell_id={props.cell_id}
                 handleDeleteCell={props.handleDeleteCell}
                 setLoadingCell={setLoadingCell}
-            />
+              />
+              )}
             </Stack>
             <Tooltip             
               title={<Typography fontSize={14}>Move Cell</Typography>} 
@@ -504,6 +515,16 @@ function Cell(props) {
                 variant="secondary"
                 sx={{
                   marginLeft: '1rem'
+                }}
+                onMouseDown={() => {
+                  // blur Box if user is dragging cell
+                  setIsDragging(true);
+                  if (boxRef.current) {
+                    boxRef.current.blur();
+                  }
+                }}
+                onMouseUp={() => {
+                  setIsDragging(false);
                 }}
               >
                 <DragIndicatorIcon fontSize="medium" />
