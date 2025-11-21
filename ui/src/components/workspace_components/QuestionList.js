@@ -172,7 +172,7 @@ function QuestionList(props) {
         direction="column" 
         spacing={2}
         style={{ 
-          padding: '6rem', 
+          padding: '5rem', 
           marginTop: '1rem', 
           marginBottom: '1rem', 
           backgroundColor: 'white',
@@ -189,7 +189,7 @@ function QuestionList(props) {
           shouldAnimateDrop={() => false}
           shouldAcceptDrop={() => false}
         >
-          <Typography variant="h4" gutterBottom="true">{projectTitle}</Typography>
+          <Typography variant="h4" >{projectTitle}</Typography>
           {sections.map((_section, index) => {
             return (
               <Draggable key={index}>

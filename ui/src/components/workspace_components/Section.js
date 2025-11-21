@@ -187,10 +187,6 @@ function Section(props) {
         </Container>
         {/* Create the add cell button */}
         <Stack direction="column" justifyContent="center" alignItems="center">
-          <Tooltip         
-            title={<Typography fontSize={14}>Add Cell</Typography>} 
-            placement="right"
-          >
             <MoreMenu
               items={["Add text cell", "Add question cell"]}
               clickHandlers={[
@@ -199,7 +195,6 @@ function Section(props) {
               ]}
               type="add_cell"
             />
-          </Tooltip>
         </Stack>
       </Stack>
     </ThemeProvider>
