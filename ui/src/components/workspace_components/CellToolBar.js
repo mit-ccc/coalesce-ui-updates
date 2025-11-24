@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 
 // import LoopIcon from '@mui/icons-material/Loop';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -534,20 +535,6 @@ function CellToolBar(props) {
           spacing={0}
         >
           <Tooltip
-            title={<Typography fontSize={14}>Generate Alternate Questions</Typography>} 
-            placement="bottom"
-            sx={{
-              visibility:
-                cellInfo.cell_details.cell_type === "question"
-                  ? "visible"
-                  : "hidden",
-            }}
-          >
-            <IconButton color="inherit" onClick={handleOpenGenerateOptions}>
-              <TipsAndUpdatesIcon fontSize="large" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
             title={<Typography fontSize={14}>Check Question for Issues</Typography>} 
             placement="bottom"
             sx={{
@@ -563,6 +550,20 @@ function CellToolBar(props) {
               ref={topOfCellToolBar}
             >
               <SearchIcon fontSize="large" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title={<Typography fontSize={14}>Generate Alternate Questions</Typography>} 
+            placement="bottom"
+            sx={{
+              visibility:
+                cellInfo.cell_details.cell_type === "question"
+                  ? "visible"
+                  : "hidden",
+            }}
+          >
+            <IconButton color="inherit" onClick={handleOpenGenerateOptions}>
+              <ModelTrainingIcon fontSize="large" />
             </IconButton>
           </Tooltip>
         </Stack>

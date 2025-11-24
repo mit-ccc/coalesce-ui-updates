@@ -12,7 +12,9 @@ import Chip from "@mui/material/Chip";
 
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
+import WarningIcon from "@mui/icons-material/Warning";
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import CheckIcon from "@mui/icons-material/Check";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import FaceIcon from "@mui/icons-material/Face";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
@@ -272,7 +274,7 @@ function Cell(props) {
       <Box
         sx={{
           mt: 1,
-          mb: 1
+          mb: 1,
         }}
       >
         {loadingCell === true ? (
@@ -335,22 +337,21 @@ function Cell(props) {
                     spacing={2}
                     sx={{ marginBottom: 3 }}
                   >
-                  <Tooltip title={<Typography fontSize={14}>Creation Method</Typography>} placement="top">
                     <Chip
                       size="small"
-                      color="primary"
+                      color={cellInfo.human_ai_status === "ai" ? "warning" : "success" }
                       icon={
                         {
-                          ai: <SmartToyIcon color='#FFFFFF'/>,
+                          ai: <WarningIcon color='#FFFFFF'/>,
                           human: <FaceIcon color='#FFFFFF'/>,
-                          human_ai: <FaceRetouchingNaturalIcon color='#FFFFFF'/>,
+                          human_ai: <CheckIcon color='#FFFFFF'/>,
                         }[cellInfo.human_ai_status]
                       }
                       label={
                         {
-                          ai: "AI",
+                          ai: "AI (No Human Edit)",
                           human: "Human",
-                          human_ai: "Human + AI",
+                          human_ai: "AI (Human Edited)",
                         }[cellInfo.human_ai_status]
                       }
                       sx={{
@@ -358,7 +359,6 @@ function Cell(props) {
                       }}
                     >
                     </Chip>
-                  </Tooltip>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <Avatar
                       sx={{
@@ -442,6 +442,12 @@ function Cell(props) {
                 />
                 </Stack>
                 {cellInfo.cell_details.cell_type === "question" && (
+                <Stack
+                  direction="column"
+                  spacing={0}
+                  sx={{paddingTop: 3, marginLeft: 5}}
+                >
+                  <Typography variant="caption" fontWeight="bold">Facilitator Notes</Typography>
                   <Input
                     id={"cell-description-" + props.cell_id}
                     // defaultValue={cellInfo.cell_details.description}
@@ -450,10 +456,11 @@ function Cell(props) {
                     //fullWidth
                     multiline={true}
                     margin="dense"
-                    sx={{ typography: "caption", paddingTop: 3, marginLeft: 5}}
+                    sx={{ typography: "caption"}}
                     onChange={handleEditLocalDescriptionText}
                     onBlur={handleEditGlobalDescriptionText}
                   />
+                </Stack>
                 )}
                 {cellInfo.cell_details.cell_type === "question" && [
                   cellInfo.cell_details.response_format === "closed" && (
