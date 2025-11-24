@@ -267,9 +267,9 @@ function SuggestionList(props) {
         sx={{
           width: "100%",
           overflow: "hidden",
-          border: `2px solid #bdbdbd`,
+          //border: `2px solid #bdbdbd`,
           mt: props.suggestion_type === "check_question" ? 2 : 4,
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "rgb(234, 237, 242)",
         }}
       >
         <AccordionSummary
@@ -293,7 +293,7 @@ function SuggestionList(props) {
             </Typography>
           ) : (
             // If there are suggestions, display them
-            <Carousel
+/*             <Carousel
               indicators={suggestions.length > 1 ? true : false}
               navButtonsAlwaysInvisible={suggestions.length === 1}
               navButtonsAlwaysVisible={suggestions.length > 1}
@@ -305,18 +305,19 @@ function SuggestionList(props) {
               index={currentSuggestionIndex}
               onChange={(index) => handleChangeIndex(index)}
               swipe={false}
-            >
+            > */
+            <div>
               {suggestions.map((suggestion, suggestion_index) => (
                 <Box
-                  sx={{ flexGrow: 1 }}
+                  sx={{ flexGrow: 1, mb: 2 }}
                   key={suggestion_index}
                   id={`suggestion_${suggestion_index}_${props.accordian_id}`}
                 >
                   <Stack
                     direction="column"
-                    alignItems={"center"}
-                    justifyContent={"center"}
-                    spacing={2}
+                    alignItems={"start"}
+                    justifyContent={"start"}
+                    spacing={1}
                   >
                     {/* If suggestion has the rationale field, display it */}
                     {suggestion.rationale && (
@@ -335,14 +336,14 @@ function SuggestionList(props) {
                       <Box
                         sx={{
                           flexGrow: 1,
-                          width: { xs: "95%", sm: "80%" },
+                         // width: { xs: "95%", sm: "80%" },
                         }}
                       >
                         {suggestion.flagged_checks.length > 0 ? (
-                          <Typography variant="body1" component="div">
+                          <Typography variant="caption" component="div">
                             {
                               <div>
-                                This question improves on{" "}
+                                This version improves on{" "}
                                 {suggestion.fixed_checks.map(
                                   (check, check_index) => {
                                     return (
@@ -395,10 +396,10 @@ function SuggestionList(props) {
                             }
                           </Typography>
                         ) : (
-                          <Typography variant="body1" component="div">
+                          <Typography variant="caption" component="div">
                             {
                               <div>
-                                This question improves on{" "}
+                                This version improves on{" "}
                                 {suggestion.fixed_checks.map(
                                   (check, check_index) => {
                                     return (
@@ -445,8 +446,9 @@ function SuggestionList(props) {
                   </Stack>
                 </Box>
               ))}
-            </Carousel>
-          )}
+              </div>
+/*             </Carousel>
+ */          )}
         </AccordionDetails>
       </Accordion>
     </ThemeProvider>

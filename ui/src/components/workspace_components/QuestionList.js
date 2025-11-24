@@ -172,11 +172,11 @@ function QuestionList(props) {
         direction="column" 
         spacing={2}
         style={{ 
-          padding: '6rem', 
+          padding: '4rem', 
           marginTop: '1rem', 
           marginBottom: '1rem', 
           backgroundColor: 'white',
-          border: '.5px solid rgba(192, 192, 192, 0.21)' 
+          border: '.5px solid rgba(192, 192, 192, 0.41)' 
         }}
       >
         <Container

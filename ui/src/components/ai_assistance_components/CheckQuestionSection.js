@@ -330,9 +330,7 @@ function CheckQuestionSection(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Divider
-        sx={{ marginTop: 2, marginBottom: 2, borderBottomWidth: "2px" }}
-      />
+      <Divider />
       {loadingChecks === true && (
         <Stack
           direction="column"
@@ -402,7 +400,7 @@ function CheckQuestionSection(props) {
           <Stack
             direction="row"
             alignItems={"center"}
-            justifyContent={"flex-end"}
+            justifyContent={"flex-center"}
             key={`check_question_buttons_${props.cell_id}`}
           >
             {showUpdateButton && (
@@ -417,15 +415,7 @@ function CheckQuestionSection(props) {
             )}
           </Stack>
           {/* Create tab bar */}
-          <Box sx={{ width: "100%" }} key={`multiple_checks_${props.cell_id}`}>
-            <Box
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-              }}
-            >
-              <Tabs value={tabValue} variant="scrollable" scrollButtons="auto">
-                {/* Add badge over tab for each check type that has issues */}
+          <Stack direction="column" sx={{ width: "100%" }} key={`multiple_checks_${props.cell_id}`}>
                 {Object.keys(check_types_to_name).map((check_type, index) => (
                   <Badge
                     key={`badge_${props.cell_id}_${index}`}
@@ -439,35 +429,8 @@ function CheckQuestionSection(props) {
                     sx={{
                       mt: 2,
                     }}
-                    // need to create this onClick since the onChange function in Tabs
-                    // is no longer called
-                    onClick={() => {
-                      handleTabChangeWithBadge(index);
-                    }}
                   >
-                    <Tab
-                      key={`tab_${props.cell_id}_${index}`}
-                      label={check_types_to_name[check_type]}
-                      sx={{ textTransform: "none" }}
-                    />
-                  </Badge>
-                ))}
-              </Tabs>
-            </Box>
-            {/* Fill in the rationale for each check type. It it doesn't exist, then write: "No X issues were detected." */}
-            {Object.keys(check_types_to_name).map((check_type, index) => (
-              <TabPanel
-                key={`tab_panel_${props.cell_id}_${index}`}
-                value={tabValue}
-                index={index}
-              >
-                <Stack
-                  direction="column"
-                  alignItems={"flex-start"}
-                  justifyContent={"center"}
-                  spacing={3}
-                >
-                  <Typography variant="body1">
+                  <Typography variant="body2" display="block">
                     {localCellChecks["cell_checks"].filter(
                       (check) => check["check_type"] === check_type
                     ).length > 0
@@ -478,10 +441,11 @@ function CheckQuestionSection(props) {
                           check_type
                         ].toLowerCase()} issues were detected.`}
                   </Typography>
-                </Stack>
-              </TabPanel>
+                  </Badge>
+/*                 </Stack>
+              </TabPanel> */
             ))}
-          </Box>
+          </Stack>
           {localCellChecks["check_suggestions"].length > 0 && (
             <SuggestionList
               suggestions={localCellChecks["check_suggestions"]}

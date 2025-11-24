@@ -111,12 +111,11 @@ function TentativeCell(props) {
         sx={{
           flexGrow: 1,
           padding: 2,
-          border: `2px solid #e0e0e0`, // or #bdbdbd
+          border: `1px dashed #e0e0e0`, // or #bdbdbd
           bgcolor: `#FFFFFF`,
           mb: 2,
           // round corners
           borderRadius: 3,
-          width: { xs: "95%", sm: "80%" },
           // maxHeight: "400px",
           // overflow: "auto",
         }}
@@ -136,7 +135,7 @@ function TentativeCell(props) {
               sx={{ width: "100%" }}
               spacing={0}
             >
-              <Typography key="0" variant="body1" component="div">
+              <Typography key="0" variant="body2" component="div">
                 {props.cellInfo.cell_details.main_text}
               </Typography>
 
@@ -150,22 +149,13 @@ function TentativeCell(props) {
                   {props.cellInfo.cell_details.description}
                 </Typography>
               )}
-
-              {props.cellInfo.cell_details.cell_type === "question" && [
-                props.cellInfo.cell_details.response_format === "closed" ? (
+              { props.cellInfo.cell_details.cell_type === "question" && [
+                props.cellInfo.cell_details.response_format === "closed" && (
                   <ResponseCategories
                     key="2"
                     editable={false}
                     responseCategories={responseCategories}
                     updateResponseCategories={setResponseCategories}
-                  />
-                ) : (
-                  <TextField
-                    key="1"
-                    placeholder="Answer goes here..."
-                    disabled={true}
-                    fullWidth
-                    sx={{ marginTop: 3 }}
                   />
                 ),
               ]}
@@ -179,36 +169,17 @@ function TentativeCell(props) {
             sx={{ width: "100%" }}
             spacing={0}
           >
-            <Typography key="0" variant="body1" component="div">
+            <Typography key="0" variant="body2" component="div">
               {props.cellInfo.cell_details.main_text}
             </Typography>
 
-            {props.cellInfo.cell_details.description !== "" && (
-              <Typography
-                key="1"
-                variant="caption"
-                component="div"
-                sx={{ paddingTop: 3 }}
-              >
-                {props.cellInfo.cell_details.description}
-              </Typography>
-            )}
-
             {props.cellInfo.cell_details.cell_type === "question" && [
-              props.cellInfo.cell_details.response_format === "closed" ? (
+              props.cellInfo.cell_details.response_format === "closed" && (
                 <ResponseCategories
                   key="2"
                   editable={false}
                   responseCategories={responseCategories}
                   updateResponseCategories={setResponseCategories}
-                />
-              ) : (
-                <TextField
-                  key="1"
-                  placeholder="Answer goes here..."
-                  disabled={true}
-                  fullWidth
-                  sx={{ marginTop: 3 }}
                 />
               ),
             ]}
@@ -219,7 +190,7 @@ function TentativeCell(props) {
         <Box
           sx={{
             flexGrow: 1,
-            width: { xs: "95%", sm: "80%" },
+            //width: { xs: "95%", sm: "80%" },
           }}
         >
           <Stack
@@ -240,13 +211,13 @@ function TentativeCell(props) {
                   >
                     <AccessTimeFilledIcon />
                   </Avatar>
-                  <Typography variant="body1" component="div" align="center">
+                  <Typography variant="body2" component="div" align="center">
                     This question would add {props.cellInfo.time_estimate}{" "}
                     minute(s) to the total time estimate.
                   </Typography>
                 </Stack>
                 <Typography
-                  variant="body1"
+                  variant="body2"
                   component="div"
                   align="center"
                   sx={{ paddingBottom: 1 }}
@@ -280,23 +251,17 @@ function TentativeCell(props) {
                   >
                     <AccessTimeFilledIcon />
                   </Avatar>
-                  <Typography variant="body1" component="div">
+                  <Typography variant="body2" component="div">
                     Deleting this question would save{" "}
                     {props.cellInfo.time_estimate} minute(s).
                   </Typography>
                 </Stack>
               )}
           </Stack>
-          <Stack
-            direction="column"
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
+
             <Button
+              size="small"
               variant="contained"
-              sx={{
-                mt: 1,
-              }}
               onClick={() => {
                 if (props.type === "add_question") {
                   props.handleChooseCell(localSectionId, props.cellInfo);
@@ -309,11 +274,10 @@ function TentativeCell(props) {
             >
               {(props.type === "choose_question" ||
                 props.type === "check_question") &&
-                "Choose question"}
+                "Use question"}
               {props.type === "add_question" && "Add question"}
               {props.type === "delete_question" && "Delete question"}
             </Button>
-          </Stack>
         </Box>
       )}
       <Menu
