@@ -616,7 +616,7 @@ function CellToolBar(props) {
             setOpenCheckQuestion(false);
             topOfCellToolBar.current.scrollIntoView({
               behavior: "smooth",
-              block: "end",
+              block: "center",
             });
           }}
         />

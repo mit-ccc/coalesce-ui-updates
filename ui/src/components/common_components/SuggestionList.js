@@ -315,9 +315,10 @@ function SuggestionList(props) {
                 >
                   <Stack
                     direction="column"
-                    alignItems={"start"}
+                    alignItems={"stretch"}
                     justifyContent={"start"}
                     spacing={1}
+                    sx={{ width: "100%" }}
                   >
                     {/* If suggestion has the rationale field, display it */}
                     {suggestion.rationale && (

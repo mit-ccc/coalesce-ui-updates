@@ -195,7 +195,7 @@ function TentativeCell(props) {
         >
           <Stack
             direction="column"
-            alignItems={"flex-start"}
+            alignItems={"stretch"}
             justifyContent={"center"}
             spacing={2}
           >
@@ -257,27 +257,28 @@ function TentativeCell(props) {
                   </Typography>
                 </Stack>
               )}
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                size="small"
+                variant="contained"
+                onClick={() => {
+                  if (props.type === "add_question") {
+                    props.handleChooseCell(localSectionId, props.cellInfo);
+                  } else if (props.type === "check_question") {
+                    props.handleChooseCell(props.cellInfo, props.suggestion_id);
+                  } else {
+                    props.handleChooseCell(props.cellInfo);
+                  }
+                }}
+              >
+                {(props.type === "choose_question" ||
+                  props.type === "check_question") &&
+                  "Use question"}
+                {props.type === "add_question" && "Add question"}
+                {props.type === "delete_question" && "Delete question"}
+              </Button>
+            </Box>
           </Stack>
-
-            <Button
-              size="small"
-              variant="contained"
-              onClick={() => {
-                if (props.type === "add_question") {
-                  props.handleChooseCell(localSectionId, props.cellInfo);
-                } else if (props.type === "check_question") {
-                  props.handleChooseCell(props.cellInfo, props.suggestion_id);
-                } else {
-                  props.handleChooseCell(props.cellInfo);
-                }
-              }}
-            >
-              {(props.type === "choose_question" ||
-                props.type === "check_question") &&
-                "Use question"}
-              {props.type === "add_question" && "Add question"}
-              {props.type === "delete_question" && "Delete question"}
-            </Button>
         </Box>
       )}
       <Menu

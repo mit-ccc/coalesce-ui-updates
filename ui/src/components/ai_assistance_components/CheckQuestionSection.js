@@ -425,6 +425,10 @@ function CheckQuestionSection(props) {
                         (check) => check["check_type"] === check_type
                       ).length
                     }
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
                     variant="dot"
                     sx={{
                       mt: 2,
