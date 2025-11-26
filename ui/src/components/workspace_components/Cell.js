@@ -11,9 +11,10 @@ import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import WarningIcon from "@mui/icons-material/Warning";
-import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import FaceIcon from "@mui/icons-material/Face";
@@ -339,23 +340,32 @@ function Cell(props) {
                   >
                     <Chip
                       size="small"
-                      color={cellInfo.human_ai_status === "ai" ? "warning" : "success" }
+                      variant={cellInfo.human_ai_status === "ai" ? "outlined" : "filled"}
+                      color="primary"
                       icon={
                         {
-                          ai: <WarningIcon color='#FFFFFF'/>,
-                          human: <FaceIcon color='#FFFFFF'/>,
-                          human_ai: <CheckIcon color='#FFFFFF'/>,
+                          ai: <AutoAwesomeIcon/>,
+                          human: <FaceIcon/>,
+                          human_ai: <CheckIcon/>,
                         }[cellInfo.human_ai_status]
                       }
                       label={
                         {
-                          ai: "AI (No Human Edit)",
+                          ai: "AI",
                           human: "Human",
-                          human_ai: "AI (Human Edited)",
+                          human_ai: "Human Reviewed",
                         }[cellInfo.human_ai_status]
                       }
                       sx={{
                         padding: ".5rem",
+                        // style chip icon and text color for outlined variant
+                        ...(cellInfo.human_ai_status === "ai" && {
+                          color: "primary.main",
+                          borderStyle: "dashed",
+                          "& .MuiChip-icon": {
+                            color: "primary.main",
+                          }
+                        })
                       }}
                     >
                     </Chip>
@@ -396,7 +406,7 @@ function Cell(props) {
                 </Stack>
             <Stack direction="row" spacing={2} alignItems="flex-start">
               <Stack direction="column" spacing={0}>
-                {/* BUG = The input doesn't become the full width unless I have a Typography component
+                {/* BUG = The input doesn"t become the full width unless I have a Typography component
                                 before it that covers the full width.
                                 SOLUTION = I added a hidden Typography component to cover the full width */}
                 <Typography
@@ -493,7 +503,7 @@ function Cell(props) {
                 className="draggy"
                 variant="secondary"
                 sx={{
-                  marginLeft: '1rem'
+                  marginLeft: "1rem"
                 }}
               >
                 <DragIndicatorIcon fontSize="medium" />
