@@ -105,7 +105,7 @@ function SurveyBuilder(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", backgroundColor: 'rgb(241, 244, 248)' }}>
+      <Box sx={{ display: "flex", backgroundColor: 'rgb(250, 250, 250)' }}>
         <CssBaseline />
         <CustomAppBar
           appBarType={"surveyBuilder"}

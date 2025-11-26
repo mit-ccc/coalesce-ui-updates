@@ -35,7 +35,7 @@ import { addEvent } from "../../store/userTrackingSlice";
 
 import { engagementTypeName } from "../../utils";
 
-const drawerWidth = 250;
+const drawerWidth = 300;
 
 //   Set style for DrawerHeader component
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -208,7 +208,7 @@ function SectionList(props) {
             width: drawerWidth,
             boxSizing: "border-box",
             border: 'none',
-            backgroundColor: 'rgb(241, 244, 248)'
+            backgroundColor: 'rgb(250, 250, 250)'
           },
         }}
       >
