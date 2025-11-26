@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Section from "./Section";
 
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Input } from "@mui/material";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
@@ -12,8 +12,9 @@ import { Container, Draggable } from "@edorivai/react-smooth-dnd";
 // redux stuff
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { moveCell } from "../../store/projectDetailsSlice";
+import { moveCell, editProjectTitle } from "../../store/projectDetailsSlice";
 import { addEvent } from "../../store/userTrackingSlice";
+import { editProject } from "../../store/userProjectsSlice";
 
 function QuestionList(props) {
   // content in right panel of SurveyBuilder
@@ -30,6 +31,47 @@ function QuestionList(props) {
 
   // get the cells from the store (for user tracking)
   const cells = useSelector((state) => state.projectDetails.cells);
+
+  // local state variable for project title
+  const [title, setTitle] = useState("");
+
+  // set the title from Redux store
+  useEffect(() => {
+    setTitle(projectTitle);
+  }, [projectTitle]);
+
+  // function to edit the project title (using local state)
+  const handleEditLocalTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  // function to edit the project title (using Redux store)
+  const handleEditGlobalTitle = (e) => {
+    // add event to user tracking
+    dispatch(
+      addEvent({
+        projectId: projectId,
+        eventType: "editProjectTitle",
+        eventDetail: {
+          previous_project_title: projectTitle,
+          new_project_title: e.target.value,
+        },
+      })
+    );
+    // update project_title in userProjectsSlice
+    dispatch(
+      editProject({
+        project_id: projectId,
+        project_title: e.target.value,
+      })
+    );
+    // update project_title in projectDetailsSlice
+    dispatch(
+      editProjectTitle({
+        project_title: e.target.value,
+      })
+    );
+  };
 
   // local state variables to keep track of potential drag and drop of cells
   const [startDrag, setStartDrag] = useState({
@@ -189,7 +231,18 @@ function QuestionList(props) {
           shouldAnimateDrop={() => false}
           shouldAcceptDrop={() => false}
         >
-          <Typography variant="h4" gutterBottom="true">{projectTitle}</Typography>
+          <Input
+            value={title}
+            fullWidth
+            onChange={handleEditLocalTitle}
+            onBlur={handleEditGlobalTitle}
+            disableUnderline
+            sx={{
+              color: "black",
+              typography: "h4",
+              marginBottom: "1rem",
+            }}
+          />
           {sections.map((_section, index) => {
             return (
               <Draggable key={index}>
