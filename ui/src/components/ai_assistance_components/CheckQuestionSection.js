@@ -330,7 +330,7 @@ function CheckQuestionSection(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Divider />
+      <Divider sx={{ marginTop: 1 }}/>
       {loadingChecks === true && (
         <Stack
           direction="column"

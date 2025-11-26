@@ -5,6 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
 
 // import LoopIcon from '@mui/icons-material/Loop';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
@@ -48,7 +49,6 @@ function CellToolBar(props) {
   // useEffect(() => {
   //   console.log(cellInfo);
   // }, [cellInfo]);
-
   // get the project_id from the store
   const project_id = useSelector((state) => state.projectDetails.project_id);
 
@@ -544,13 +544,21 @@ function CellToolBar(props) {
                   : "hidden",
             }}
           >
-            <IconButton
-              color="inherit"
+            <Button
+              size="large"
+              variant="text"
               onClick={toggleCheckQuestion}
               ref={topOfCellToolBar}
+              startIcon={<SearchIcon/>}
+              sx={{
+                backgroundColor: openCheckQuestion ? 'action.selected' : 'transparent',
+                '&:hover': {
+                  backgroundColor: openCheckQuestion ? 'action.hover' : 'action.hover',
+                }
+              }}
             >
-              <SearchIcon fontSize="large" />
-            </IconButton>
+              find issues
+            </Button>
           </Tooltip>
           <Tooltip
             title={<Typography fontSize={14}>Generate Alternate Questions</Typography>} 
@@ -562,9 +570,21 @@ function CellToolBar(props) {
                   : "hidden",
             }}
           >
-            <IconButton color="inherit" onClick={handleOpenGenerateOptions}>
-              <ModelTrainingIcon fontSize="large" />
-            </IconButton>
+            <Button
+              size="large"
+              variant="text"
+              onClick={handleOpenGenerateOptions}
+              ref={topOfCellToolBar}
+              startIcon={<ModelTrainingIcon/>}
+              sx={{
+                backgroundColor: openGenerateOptions ? 'action.selected' : 'transparent',
+                '&:hover': {
+                  backgroundColor: openGenerateOptions ? 'action.hover' : 'action.hover',
+                }
+              }}
+            >
+              regenerate
+            </Button>
           </Tooltip>
         </Stack>
       </Stack>
