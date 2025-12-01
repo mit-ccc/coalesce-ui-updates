@@ -66,7 +66,17 @@ function SuggestionList(props) {
             },
           })
         );
-      } else if (props.suggestion_type === "delete") {
+      } else if (props.suggestion_type === "generate_options") {
+          dispatch(
+            addEvent({
+              projectId: projectId,
+              eventType: "expandGenerateOptionsSuggestions",
+              eventDetail: {
+                cell_id: props.accordian_id,
+              },
+            })
+          );
+        } else if (props.suggestion_type === "delete") {
         dispatch(
           addEvent({
             projectId: projectId,
@@ -95,6 +105,16 @@ function SuggestionList(props) {
             eventType: "collapseTopicAdditionSuggestions",
             eventDetail: {
               topic_name: props.accordian_id,
+            },
+          })
+        );
+      } else if (props.suggestion_type === "generate_options") {
+        dispatch(
+          addEvent({
+            projectId: projectId,
+            eventType: "collapseGenerateOptionsSuggestions",
+            eventDetail: {
+             cell_id: props.accordian_id,
             },
           })
         );
@@ -281,6 +301,8 @@ function SuggestionList(props) {
             {/* {expanded ? "Collapse" : "Expand"}  */}
             {props.suggestion_type === "check_question" &&
               "Improvement Suggestions"}
+              {props.suggestion_type === "generate_options" &&
+              "Explore Alternative Questions"}
             {props.suggestion_type === "add" && "Suggestions for Addition"}
             {props.suggestion_type === "delete" && "Suggestions for Deletion"}
           </Typography>

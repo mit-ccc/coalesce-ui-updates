@@ -237,6 +237,7 @@ function QuestionList(props) {
             onChange={handleEditLocalTitle}
             onBlur={handleEditGlobalTitle}
             disableUnderline
+            multiline={true}
             sx={{
               color: "black",
               typography: "h4",

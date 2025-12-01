@@ -17,7 +17,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
 
 // helper components
-import GenerateOptionsDialog from "../ai_assistance_components/GenerateOptionsDialog";
+import GenerateOptionsSection from "../ai_assistance_components/GenerateOptionsSection";
 import MoreMenu from "../common_components/MoreMenu";
 import ConfirmationDialog from "../common_components/ConfirmationDialog";
 import CheckQuestionSection from "../ai_assistance_components/CheckQuestionSection";
@@ -391,33 +391,32 @@ function CellToolBar(props) {
   // state variable for generate options dialog
   const [openGenerateOptions, setOpenGenerateOptions] = useState(false);
 
-  const handleOpenGenerateOptions = () => {
+  const toggleGenerateOptions = () => {
     // add event to user tracking
-    dispatch(
-      addEvent({
-        projectId: project_id,
-        eventType: "openGenerateOptions",
-        eventDetail: {
-          cell_id: props.cell_id,
-          cell: cellInfo,
-        },
-      })
-    );
-    setOpenGenerateOptions(true);
-  };
-
-  const handleCloseGenerateOptions = () => {
-    // add event to user tracking
-    dispatch(
-      addEvent({
-        projectId: project_id,
-        eventType: "closeGenerateOptions",
-        eventDetail: {
-          cell_id: props.cell_id,
-        },
-      })
-    );
-    setOpenGenerateOptions(false);
+    if (openGenerateOptions === false) {
+      dispatch(
+        addEvent({
+          projectId: project_id,
+          eventType: "openGenerateOptions",
+          eventDetail: {
+            cell_id: props.cell_id,
+            cell: cellInfo,
+          },
+        })
+      );
+      setOpenCheckQuestion(false);
+    } else {
+      dispatch(
+        addEvent({
+          projectId: project_id,
+          eventType: "closeGenerateOptions",
+          eventDetail: {
+            cell_id: props.cell_id,
+          },
+        })
+      );
+    }
+    setOpenGenerateOptions(!openGenerateOptions);
   };
 
   // CODE FOR CHECK QUESTION
@@ -438,6 +437,7 @@ function CellToolBar(props) {
           },
         })
       );
+      setOpenGenerateOptions(false);
     } else {
       dispatch(
         addEvent({
@@ -573,7 +573,7 @@ function CellToolBar(props) {
             <Button
               size="large"
               variant="text"
-              onClick={handleOpenGenerateOptions}
+              onClick={toggleGenerateOptions}
               ref={topOfCellToolBar}
               startIcon={<ModelTrainingIcon/>}
               sx={{
@@ -602,11 +602,19 @@ function CellToolBar(props) {
         cancelText="Cancel"
       />
       {/* Generate Options Dialog */}
-      <GenerateOptionsDialog
+      {openGenerateOptions && (
+      <GenerateOptionsSection
         cell_id={props.cell_id}
         open={openGenerateOptions}
-        handleClose={handleCloseGenerateOptions}
+        handleClose={() => {
+          setOpenGenerateOptions(false);
+          topOfCellToolBar.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }}
       />
+      )}
       {/* Check Question Section */}
       {openCheckQuestion && (
         <CheckQuestionSection
