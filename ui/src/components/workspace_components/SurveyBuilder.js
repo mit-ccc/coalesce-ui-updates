@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../common_components/theme";
+import { useMediaQuery } from "@mui/material";
 
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
@@ -59,8 +60,11 @@ function SurveyBuilder(props) {
   // get the project_id from the store
   const project_id = useSelector((state) => state.projectDetails.project_id);
 
+  // get screen size (to close drawer for small screens)
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
+
   // open refers to whether the drawer is open or not
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(!isSmallScreen);
 
   const handleToggleDrawer = () => {
     // add event to userTrackingSlice
@@ -83,6 +87,12 @@ function SurveyBuilder(props) {
     }
     setOpen(!open);
   };
+
+  useEffect(() => {
+    if (isSmallScreen) {
+      setOpen(false);
+    }
+  }, [isSmallScreen]);
 
   // get the sections from the store
   const sections = useSelector((state) => state.projectDetails.sections);
