@@ -454,14 +454,12 @@ function CheckQuestionSection(props) {
             ))}
           </Stack>
           {localCellChecks["check_suggestions"].length > 0 && (
-          <Stack direction="row" justifyContent="center" marginTop={2}>
             <SuggestionList
               suggestions={localCellChecks["check_suggestions"]}
               suggestion_type={"check_question"}
               accordian_id={props.cell_id}
               handleChooseCell={handleChooseCell}
             />
-          </Stack>
           )}
         </Stack>
       ) : undefined}
