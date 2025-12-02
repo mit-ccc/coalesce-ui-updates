@@ -323,6 +323,7 @@ function Cell(props) {
                 padding: 3,
                 borderRadius: 3,
                 border: `1px dashed #e0e0e0`,
+                boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.17)'
               }}
             >
               <Stack

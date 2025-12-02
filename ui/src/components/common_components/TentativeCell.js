@@ -116,6 +116,7 @@ function TentativeCell(props) {
           mb: 2,
           // round corners
           borderRadius: 3,
+          boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.17)'
           // maxHeight: "400px",
           // overflow: "auto",
         }}
@@ -190,7 +191,6 @@ function TentativeCell(props) {
         <Box
           sx={{
             flexGrow: 1,
-            //width: { xs: "95%", sm: "80%" },
           }}
         >
           <Stack

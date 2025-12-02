@@ -7,7 +7,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import { Stack } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
-import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
 
 // redux stuff
 import { useSelector } from "react-redux";
@@ -395,14 +395,14 @@ function GenerateOptionsSection(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Divider sx={{ marginTop: 1 }} />
       {loadingRewordings === true && (
         <Stack
           direction="column"
-          alignItems="flex-start"
+          alignItems="center"
           justifyContent="center"
           key={`loading_general_rewordings_${props.cell_id}`}
           spacing={2}
+          marginTop={1}
         >
           <CircularProgress />
           {secondsPassed <= 15 ? (
@@ -425,11 +425,11 @@ function GenerateOptionsSection(props) {
       {loadingRewordings === false && serverError === true && (
         <Stack
           direction="column"
-          alignItems="flex-start"
+          alignItems="center"
           justifyContent="center"
           key={`error_loading_general_rewordings_${props.cell_id}`}
           spacing={2}
-          sx={{ width: { xs: "95%", sm: "80%" } }}
+          marginTop={1}
         >
           <Typography variant="body1" color="error">
             An error occurred while generating alternative questions. Please
@@ -449,45 +449,55 @@ function GenerateOptionsSection(props) {
       {rewordings.length > 0 &&
         loadingRewordings === false &&
         serverError === false && (
-          <Stack direction="column" spacing={3} sx={{ mt: 3 }}>
-            <Typography variant="h6" sx={{ paddingTop: 5 }}>
-              Generate your own question with a specific request.
+          <Stack 
+            direction="column" 
+            spacing={2} 
+            alignItems="flex-start"
+            justifyContent="center"
+            sx={{ mt: 3 }}
+          >
+            <Typography variant="body2">
+              Regenerate this question with a specific prompt:
             </Typography>
             <TextField
               hiddenLabel
               value={specificRequest}
               variant="outlined"
               multiline={true}
-              minRows={4}
-              placeholder="Enter text here"
+              minRows={2}
+              placeholder="Make this question more..."
               onChange={handleEditSpecificRequest}
-              sx={{ width: { xs: "95%", sm: "80%" } }}
+              sx={{ width: "100%" }}
             />
+            <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
             {specificRequestId !== null ? (
               <Button
                 variant="contained"
+                size="small"
                 onClick={handleCreateQuestion}
                 disabled={loadingSpecificRewordings}
               >
-                Recreate Question
+                Regenereate Question
               </Button>
             ) : (
               <Button
                 variant="contained"
+                size="small"
                 onClick={handleCreateQuestion}
                 disabled={loadingSpecificRewordings}
               >
-                Create Question
+                Generate Question
               </Button>
             )}
+            </Box>
             {loadingSpecificRewordings === true && (
               <Stack
                 direction="column"
-                alignItems="flex-start"
+                alignItems="center"
                 justifyContent="center"
+                width="100%"
                 key={`loading_specific_rewordings_${props.cell_id}`}
                 spacing={2}
-                sx={{ width: { xs: "95%", sm: "80%" } }}
               >
                 <CircularProgress />
                 {secondsPassedSpecific <= 15 ? (
@@ -513,7 +523,7 @@ function GenerateOptionsSection(props) {
               serverErrorSpecific === true && (
                 <Stack
                   direction="column"
-                  alignItems="flex-start"
+                  alignItems="center"
                   justifyContent="center"
                   key={`error_loading_specific_rewordings_${props.cell_id}`}
                   spacing={2}
@@ -531,14 +541,12 @@ function GenerateOptionsSection(props) {
               loadingSpecificRewordings === false &&
               serverErrorSpecific === false && (
                 <Stack
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="flex-start"
-                  sx={{
-                    width: "100%",
-                    paddingTop: 3,
-                  }}
-                >
+                direction="column"
+                alignItems={"stretch"}
+                justifyContent={"start"}
+                spacing={2}
+                sx={{ width: "100%" }}
+              >
                   <TentativeCell
                     key={rewordings.length}
                     type={"choose_question"}
@@ -548,7 +556,7 @@ function GenerateOptionsSection(props) {
                     handleChooseCell={handleChooseCell}
                   />
                 </Stack>
-              )}
+             )}
             <div ref={specificRequestRef}></div>
             {rewordings.length > 0 && (
               <SuggestionList

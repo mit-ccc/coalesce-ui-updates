@@ -331,7 +331,7 @@ function SuggestionList(props) {
             <div>
               {suggestions.map((suggestion, suggestion_index) => (
                 <Box
-                  sx={{ flexGrow: 1, mb: 2 }}
+                  sx={{ flexGrow: 1, mb: 2, pl: 4, pr: 4}}
                   key={suggestion_index}
                   id={`suggestion_${suggestion_index}_${props.accordian_id}`}
                 >
@@ -339,7 +339,7 @@ function SuggestionList(props) {
                     direction="column"
                     alignItems={"stretch"}
                     justifyContent={"start"}
-                    spacing={1}
+                    spacing={2}
                     sx={{ width: "100%" }}
                   >
                     {/* If suggestion has the rationale field, display it */}

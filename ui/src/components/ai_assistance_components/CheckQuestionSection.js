@@ -330,7 +330,6 @@ function CheckQuestionSection(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Divider sx={{ marginTop: 1 }}/>
       {loadingChecks === true && (
         <Stack
           direction="column"
@@ -338,6 +337,7 @@ function CheckQuestionSection(props) {
           justifyContent="center"
           key={`loading_checks_${props.cell_id}`}
           spacing={2}
+          marginTop={1}
         >
           <CircularProgress />
           {secondsPassed <= 15 && (
@@ -370,6 +370,7 @@ function CheckQuestionSection(props) {
           justifyContent="center"
           key={`error_loading_checks_${props.cell_id}`}
           spacing={2}
+          marginTop={1}
         >
           <Typography variant="body1" color="error">
             An error occurred while checking the question for issues in
@@ -392,9 +393,11 @@ function CheckQuestionSection(props) {
         <Stack
           direction="column"
           spacing={0}
+          alignItems={"center"}
+          justifyContent={"flex-center"}
           key={`show_checks_${props.cell_id}`}
           sx={{
-            mt: 3,
+            mt: 2,
           }}
         >
           <Stack
@@ -451,12 +454,14 @@ function CheckQuestionSection(props) {
             ))}
           </Stack>
           {localCellChecks["check_suggestions"].length > 0 && (
+          <Stack direction="row" justifyContent="center" marginTop={2}>
             <SuggestionList
               suggestions={localCellChecks["check_suggestions"]}
               suggestion_type={"check_question"}
               accordian_id={props.cell_id}
               handleChooseCell={handleChooseCell}
             />
+          </Stack>
           )}
         </Stack>
       ) : undefined}

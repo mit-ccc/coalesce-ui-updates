@@ -6,6 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 
 // import LoopIcon from '@mui/icons-material/Loop';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
@@ -532,7 +534,7 @@ function CellToolBar(props) {
         <Stack
           direction="row"
           alignItems="center"
-          spacing={0}
+          spacing={1}
         >
           <Tooltip
             title={<Typography fontSize={14}>Check Question for Issues</Typography>} 
@@ -603,20 +605,28 @@ function CellToolBar(props) {
       />
       {/* Generate Options Dialog */}
       {openGenerateOptions && (
-      <GenerateOptionsSection
-        cell_id={props.cell_id}
-        open={openGenerateOptions}
-        handleClose={() => {
-          setOpenGenerateOptions(false);
-          topOfCellToolBar.current.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
-        }}
-      />
+      <Box>
+      <Divider sx={{ marginTop: 1 }} />
+      <Stack paddingLeft={4} paddingRight={4}>
+        <GenerateOptionsSection
+          cell_id={props.cell_id}
+          open={openGenerateOptions}
+          handleClose={() => {
+            setOpenGenerateOptions(false);
+            topOfCellToolBar.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }}
+        />
+      </Stack>
+      </Box>
       )}
       {/* Check Question Section */}
       {openCheckQuestion && (
+      <Box>
+      <Divider sx={{ marginTop: 1 }} />
+      <Stack paddingLeft={4} paddingRight={4}>
         <CheckQuestionSection
           cell_id={props.cell_id}
           open={openCheckQuestion}
@@ -628,6 +638,8 @@ function CellToolBar(props) {
             });
           }}
         />
+      </Stack>
+      </Box>
       )}
     </ThemeProvider>
   );
