@@ -208,7 +208,8 @@ function SectionList(props) {
             width: drawerWidth,
             boxSizing: "border-box",
             border: 'none',
-            backgroundColor: 'rgb(250, 250, 250)'
+            backgroundColor: 'rgb(250, 250, 250)',
+            padding: 2
           },
         }}
       >
